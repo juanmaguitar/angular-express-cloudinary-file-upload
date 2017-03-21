@@ -3,17 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
+
 </head>
 <body>
 
   <div ng-app="myApp" ng-controller="MainController">
 
-   Upload File:
+     Upload File:
 
-   <form enctype='multipart/form-data'>
-     <input name="file" type="file" ngf-select="fileSelected($files)" accept="'image/*'">
-     <input type="submit" ng-click="uploadFile()" >
-   </form>
+     <form enctype='multipart/form-data'>
+       <input name="file" type="file" ngf-select="fileSelected($files)" accept="'image/*'">
+       <input type="submit" ng-click="uploadFile()" >
+     </form>
+
+     <div>
+       <img class="img-responsive" ng-src="{{ imageLink }}" alt="">
+     </div>
   </div>
 
 
@@ -24,7 +29,6 @@
   <script src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
 
   <script>
-
     (function() {
 
       var app = angular.module('myApp', ['ngFileUpload']);
@@ -40,21 +44,15 @@
         }
 
         $scope.uploadFile = function(){
-
           const url = '/upload' //node.js route
           const file = $scope.file
-
           Upload.upload({ url, file })
-            .success( (data) =>  console.log(data, 'uploaded') )
-
+            .success( ({imageLink}) => $scope.imageLink = imageLink )
         }
-
 
       }
 
     })()
-
-
   </script>
 </body>
 </html>
