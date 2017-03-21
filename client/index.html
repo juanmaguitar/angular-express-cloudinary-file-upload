@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+  <div ng-app="myApp" ng-controller="MainController">
+
+   Upload File:
+
+   <form enctype='multipart/form-data'>
+     <input name="file" type="file" ngf-select="fileSelected($files)" accept="'image/*'">
+     <input type="submit" ng-click="uploadFile()" >
+   </form>
+  </div>
+
+
+  <script src="bower_components/angular/angular.min.js"></script>
+
+  <!--shim is needed to support non-html5 browsers -->
+  <script src="bower_components/ng-file-upload/ng-file-upload-shim.min.js"></script>
+  <script src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
+
+  <script>
+
+    (function() {
+
+      var app = angular.module('myApp', ['ngFileUpload']);
+
+      app.controller('MainController', MainController);
+
+      function MainController( $scope, Upload ) {
+
+        $scope.fileSelected = (files) => {
+          if (files && files.length) {
+            $scope.file = files[0];
+          }
+        }
+
+        $scope.uploadFile = function(){
+
+          const url = '/upload' //node.js route
+          const file = $scope.file
+
+          Upload.upload({ url, file })
+            .success( (data) =>  console.log(data, 'uploaded') )
+
+        }
+
+
+      }
+
+    })()
+
+
+  </script>
+</body>
+</html>
