@@ -1,26 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="myApp" >
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
-
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 
-  <div ng-app="myApp" ng-controller="MainController">
-
-     Upload File:
-
-     <form enctype='multipart/form-data'>
-       <input name="file" type="file" ngf-select="fileSelected($files)" accept="'image/*'">
-       <input type="submit" ng-click="uploadFile()" >
-     </form>
-
-     <div>
-       <img class="img-responsive" ng-src="{{ imageLink }}" alt="">
-     </div>
-  </div>
-
+  <div ng-controller="MainController" ng-include="'includes/upload.html'"></div>
 
   <script src="bower_components/angular/angular.min.js"></script>
 
@@ -28,31 +17,8 @@
   <script src="bower_components/ng-file-upload/ng-file-upload-shim.min.js"></script>
   <script src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
 
-  <script>
-    (function() {
+  <script src="js/app.js"></script>
+  <script src="js/MainController.js"></script>
 
-      var app = angular.module('myApp', ['ngFileUpload']);
-
-      app.controller('MainController', MainController);
-
-      function MainController( $scope, Upload ) {
-
-        $scope.fileSelected = (files) => {
-          if (files && files.length) {
-            $scope.file = files[0];
-          }
-        }
-
-        $scope.uploadFile = function(){
-          const url = '/upload' //node.js route
-          const file = $scope.file
-          Upload.upload({ url, file })
-            .success( ({imageLink}) => $scope.imageLink = imageLink )
-        }
-
-      }
-
-    })()
-  </script>
 </body>
 </html>
