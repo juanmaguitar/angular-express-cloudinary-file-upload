@@ -7,8 +7,7 @@ This repo contains a demo of uploading an image to a a Cloudinary server from an
 
 It contains 4 versions labeled w/ tags:
 
-###
-`simple-upload`
+###`simple-upload`
 
 This is a simple version of uploading a file to a folder `/uploads` in our server 
 
