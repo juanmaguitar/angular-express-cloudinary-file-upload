@@ -11,11 +11,19 @@
       }
     }
 
-    $scope.uploadFile = function(){
-      const url = '/upload' //node.js route
+    $scope.uploadFile = function() {
+      const url = '/upload'
       const file = $scope.file
+
+      // show spinning when uploading
+      $scope.uploading = true;
+      document.querySelector('.preview').onload = () => {
+        $scope.$apply( () => $scope.uploading = false )
+      }
+
       Upload.upload({ url, file })
         .success( ({imageLink}) => $scope.imageLink = imageLink )
+        //.progress( console.log )
     }
 
   }

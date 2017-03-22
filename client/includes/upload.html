@@ -19,9 +19,10 @@
                 <!-- rename it -->
               </div>
               <button ng-click="uploadFile()" type="button" class="btn btn-labeled btn-primary">
-              <span class="btn-label">
-                <i class="glyphicon glyphicon-upload"></i>
-              </span>Upload</button>
+                <i ng-hide="uploading" class="glyphicon glyphicon-upload"></i>
+                <i ng-show="uploading" class="glyphicon glyphicon-refresh"></i>
+                <span>Upload</span>
+              </button>
             </span>
           </div>
           <!-- /input-group image-preview [TO HERE]-->
@@ -29,7 +30,7 @@
       </div>
     </div>
     <div class="col-md-6">
-      <img class="img-responsive" ng-src="{{ imageLink }}" alt="">
+      <img class="img-responsive preview" ng-src="{{ imageLink }}" alt="">
     </div>
   </div>
 </div>
