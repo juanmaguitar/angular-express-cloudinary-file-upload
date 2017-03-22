@@ -21,7 +21,7 @@ Cloudinary will return a url that we can use to show the image and to store in D
 
 This version improves the UI by using bootstrap to display the elements involved in the upload of the image
 
-###`spinning` _(last one)_
+###`spinning`
 
 This version add a spinning icon that will be shown rotating while the image is uploading and loaded into our page
 
